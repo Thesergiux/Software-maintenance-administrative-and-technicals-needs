@@ -124,9 +124,10 @@ def main():
         print("4. Edit Task")
         print("5. Mark Task as Complete")
         print("6. Delete Task")
-        print("7. Exit")
+        print("7. View DataBase")
+        print("8. Exit")
 
-        choice = input("Enter your choice (1-7): ")
+        choice = input("Enter your choice (1-8): ")
 
         try:
             if choice == "1":
@@ -168,8 +169,15 @@ def main():
             elif choice == "6":
                 task_id = input("Enter task ID to delete: ")
                 task_manager.delete_task(task_id)
-
+                
             elif choice == "7":
+                 if os.path.exists(task_manager.file_name):
+                    print("\nContent of tasks.json:")
+                    with open(task_manager.file_name, "r") as file:
+                        data = json.load(file)
+                        print(json.dumps(data, indent=2))
+
+            elif choice == "8":
                 print("Exiting Task Manager. Goodbye!")
                 break
 
